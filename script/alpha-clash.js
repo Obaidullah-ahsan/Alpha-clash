@@ -3,7 +3,7 @@ function playNow() {
     removeElementById('play-ground')
     continueGame();
 }
-function score(){
+function score() {
     addElementById('home-screen')
     addElementById('play-ground')
     removeElementById('final-score')
@@ -16,8 +16,24 @@ function continueGame() {
     const alphabet = finalAlphabet.toLowerCase();
     setBacgroundColorById(alphabet);
 }
+function handleButtonPrees(event) {
+    const playerPressed = event.key;
+    // console.log('Player press', playerPressed);
 
+    const currentAlphabet = document.getElementById("current-alphabet");
+    const alphabet = currentAlphabet.innerText;
+    const alphabetLower = alphabet.toLowerCase();
+    // console.log(playerPressed , alphabetLower);
+    if (alphabetLower === playerPressed){
+        console.log('You Got A Point');
+    }
+    else{
+        console.log('You Missed , You Lost A Life');
+    }
+}
+document.addEventListener('keyup', handleButtonPrees);
 
+// utility function
 function addElementById(elementId) {
     const element = document.getElementById(elementId);
     element.classList.add('hidden')
@@ -33,12 +49,11 @@ function getARandomAlphabet() {
     const randomNumber = Math.random() * 26;
     const index = Math.round(randomNumber)
 
-    const alphabetLower = alphabets[index];
-    const alphabet = alphabetLower.toUpperCase();
+    const alphabet = alphabets[index];
     return alphabet;
 }
 
-function setBacgroundColorById(elementId){
+function setBacgroundColorById(elementId) {
     const element = document.getElementById(elementId);
     element.classList.add('bg-[#FFA500]');
 }
